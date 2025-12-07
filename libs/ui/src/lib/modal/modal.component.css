@@ -1,0 +1,240 @@
+/* Modal Overlay - Full screen container */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  overflow-y: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  animation: fadeIn 0.2s ease-out;
+}
+
+/* Enhanced Backdrop with premium blur effect */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(37, 99, 235, 0.25);
+  backdrop-filter: blur(8px) saturate(180%);
+  -webkit-backdrop-filter: blur(8px) saturate(180%);
+  z-index: 9998;
+  animation: fadeIn 0.2s ease-out;
+}
+
+/* Modal Container - Centers the dialog */
+.modal-container {
+  position: relative;
+  z-index: 9999;
+  width: 100%;
+  max-width: 100%;
+  min-height: calc(100vh - 2rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+/* Modal Dialog - The actual modal box */
+.modal-dialog {
+  position: relative;
+  width: 100%;
+  max-width: 32rem; /* 512px - lg breakpoint */
+  background: white;
+  border-radius: 1.5rem; /* rounded-3xl */
+  box-shadow: 
+    0 25px 50px -12px rgba(0, 0, 0, 0.25),
+    0 0 0 1px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 2rem);
+  margin: auto;
+  transform: scale(0.95) translateY(1rem);
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+/* Dark mode support */
+.dark .modal-dialog {
+  background: #1f2937; /* gray-800 */
+  box-shadow: 
+    0 25px 50px -12px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+/* Enter animation */
+.modal-dialog.modal-entering {
+  transform: scale(1) translateY(0);
+  opacity: 1;
+}
+
+/* Exit animation */
+.modal-dialog.modal-exiting {
+  transform: scale(0.95) translateY(1rem);
+  opacity: 0;
+}
+
+/* Modal Header */
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 2rem; /* py-6 px-8 */
+  border-bottom: 1px solid rgba(229, 231, 235, 0.6); /* border-gray-200/60 */
+  background: white; /* solid white background */
+  border-radius: 1.5rem 1.5rem 0 0;
+  flex-shrink: 0;
+}
+
+.dark .modal-header {
+  border-bottom-color: rgba(55, 65, 81, 0.6); /* border-gray-700/60 */
+  background: #1f2937; /* gray-800 - solid background */
+}
+
+/* Modal Title - Enhanced typography */
+.modal-title {
+  font-size: 1.5rem; /* text-2xl */
+  font-weight: 600; /* font-semibold */
+  letter-spacing: -0.025em; /* tracking-tight */
+  line-height: 1.2;
+  color: #111827; /* text-gray-900 */
+  margin: 0;
+}
+
+.dark .modal-title {
+  color: #ffffff;
+}
+
+/* Modal Body - Scrollable content area */
+.modal-body {
+  padding: 2rem; /* p-8 */
+  overflow-y: auto;
+  overflow-x: hidden;
+  flex: 1 1 auto;
+  min-height: 0;
+  background: white; /* solid white background */
+  /* Custom scrollbar styling */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(156, 163, 175, 0.5) transparent;
+}
+
+.dark .modal-body {
+  background: #1f2937; /* gray-800 - solid background */
+}
+
+.modal-body::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modal-body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.modal-body::-webkit-scrollbar-thumb {
+  background-color: rgba(156, 163, 175, 0.5);
+  border-radius: 4px;
+}
+
+.modal-body::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(156, 163, 175, 0.7);
+}
+
+.dark .modal-body::-webkit-scrollbar-thumb {
+  background-color: rgba(75, 85, 99, 0.5);
+}
+
+.dark .modal-body::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(75, 85, 99, 0.7);
+}
+
+/* Modal Footer - Sticky footer */
+.modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 1.5rem 2rem; /* py-6 px-8 */
+  border-top: 1px solid rgba(229, 231, 235, 0.6); /* border-gray-200/60 */
+  background: white; /* solid white background */
+  border-radius: 0 0 1.5rem 1.5rem;
+  flex-shrink: 0;
+  gap: 0.75rem; /* gap-3 */
+}
+
+.dark .modal-footer {
+  border-top-color: rgba(55, 65, 81, 0.6); /* border-gray-700/60 */
+  background: #1f2937; /* gray-800 - solid background */
+}
+
+/* Fade in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Responsive design - Mobile optimizations */
+@media (max-width: 640px) {
+  .modal-container {
+    padding: 0.5rem;
+    align-items: flex-end; /* Bottom aligned on mobile */
+  }
+
+  .modal-dialog {
+    max-width: 100%;
+    max-height: calc(100vh - 1rem);
+    border-radius: 1.5rem 1.5rem 0 0; /* Rounded top only on mobile */
+    margin-bottom: 0;
+  }
+
+  .modal-header {
+    padding: 1.25rem 1.5rem; /* py-5 px-6 */
+  }
+
+  .modal-body {
+    padding: 1.5rem; /* p-6 */
+    max-height: calc(100vh - 12rem); /* Account for header + footer */
+  }
+
+  .modal-footer {
+    padding: 1.25rem 1.5rem; /* py-5 px-6 */
+  }
+
+  .modal-title {
+    font-size: 1.25rem; /* text-xl */
+  }
+}
+
+/* Tablet optimizations */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .modal-dialog {
+    max-width: 90%;
+  }
+}
+
+/* Large screen optimizations */
+@media (min-width: 1024px) {
+  .modal-dialog {
+    max-width: 36rem; /* 576px */
+  }
+}
+
+/* Focus trap - Ensure focus stays within modal */
+.modal-overlay:focus-within {
+  outline: none;
+}
+
+/* Prevent body scroll when modal is open */
+body.modal-open {
+  overflow: hidden;
+  padding-right: var(--scrollbar-width, 0);
+}
+
+/* Smooth transitions for all interactive elements */
+.modal-dialog * {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+

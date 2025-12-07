@@ -1,0 +1,29 @@
+<div class="overflow-x-auto">
+  <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+    <thead>
+      <tr>
+        @for (col of [].constructor(columns); track $index) {
+          <th class="px-6 py-3 text-left">
+            <app-skeleton type="text" width="100px" height="1rem" />
+          </th>
+        }
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-gray-200 bg-white dark:divide-gray-700 dark:bg-gray-800">
+      @for (row of [].constructor(rows); track $index) {
+        <tr>
+          @for (col of [].constructor(columns); track $index) {
+            <td class="px-6 py-4">
+              <app-skeleton
+                type="text"
+                [width]="$index === columns - 1 ? '80px' : '100%'"
+                height="1rem"
+              />
+            </td>
+          }
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
+

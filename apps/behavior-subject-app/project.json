@@ -1,0 +1,78 @@
+{
+  "name": "behavior-subject-app",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/behavior-subject-app/src",
+  "prefix": "app",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/behavior-subject-app",
+        "index": "apps/behavior-subject-app/src/index.html",
+        "main": "apps/behavior-subject-app/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/behavior-subject-app/tsconfig.app.json",
+        "assets": [
+          "apps/behavior-subject-app/src/favicon.ico",
+          "apps/behavior-subject-app/src/assets"
+        ],
+        "styles": ["apps/behavior-subject-app/src/styles.css"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "options": {
+        "port": 4200
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "behavior-subject-app:build:production"
+        },
+        "development": {
+          "buildTarget": "behavior-subject-app:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "behavior-subject-app:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}
+

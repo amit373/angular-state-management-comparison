@@ -1,0 +1,93 @@
+<div class="mt-8 flex flex-col items-center justify-between gap-4 rounded-xl bg-gray-50/50 dark:bg-gray-800/50 px-4 py-4 sm:px-6 sm:flex-row">
+  <div class="flex flex-col sm:flex-row items-center gap-4">
+    <p class="text-sm font-medium text-gray-700 dark:text-gray-300">
+      Showing <span class="font-bold text-gray-900 dark:text-white">{{ startIndex }}</span> to <span class="font-bold text-gray-900 dark:text-white">{{ endIndex }}</span> of <span class="font-bold text-gray-900 dark:text-white">{{ total }}</span> posts
+    </p>
+    @if (showPageSizeSelector) {
+      <div class="flex items-center gap-2">
+        <span class="text-sm text-gray-600 dark:text-gray-400">Show:</span>
+        <div class="w-36">
+          <app-select
+            id="pageSize"
+            [value]="limit"
+            [options]="pageSizeOptionsFormatted"
+            (valueChange)="onLimitChange($event)"
+          />
+        </div>
+      </div>
+    }
+  </div>
+  <div class="flex items-center gap-2">
+    <app-button
+      variant="secondary"
+      size="sm"
+      [disabled]="!hasPrev"
+      (onClick)="onFirst()"
+      class="!px-2"
+      [title]="'First page'"
+    >
+      <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7"/>
+      </svg>
+    </app-button>
+    <app-button
+      variant="secondary"
+      size="sm"
+      [disabled]="!hasPrev"
+      (onClick)="onPrevious()"
+    >
+      <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+      </svg>
+      <span class="hidden sm:inline">Previous</span>
+    </app-button>
+    
+    <div class="flex items-center gap-1">
+      @for (page of visiblePages; track page) {
+        @if (page === '...') {
+          <span class="px-2 py-1 text-sm text-gray-500 dark:text-gray-400">...</span>
+        } @else {
+          @if (page === currentPage) {
+            <button
+              (click)="onPageChange(getPageNumber(page))"
+              class="min-w-[2.5rem] px-3 py-1.5 text-sm font-medium rounded-lg transition-all duration-200 hover:scale-105 bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-md"
+            >
+              {{ page }}
+            </button>
+          } @else {
+            <button
+              (click)="onPageChange(getPageNumber(page))"
+              class="min-w-[2.5rem] px-3 py-1.5 text-sm font-medium rounded-lg transition-all duration-200 hover:scale-105 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600"
+            >
+              {{ page }}
+            </button>
+          }
+        }
+      }
+    </div>
+    
+    <app-button
+      variant="secondary"
+      size="sm"
+      [disabled]="!hasNext"
+      (onClick)="onNext()"
+    >
+      <span class="hidden sm:inline">Next</span>
+      <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+      </svg>
+    </app-button>
+    <app-button
+      variant="secondary"
+      size="sm"
+      [disabled]="!hasNext"
+      (onClick)="onLast()"
+      class="!px-2"
+      [title]="'Last page'"
+    >
+      <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7"/>
+      </svg>
+    </app-button>
+  </div>
+</div>

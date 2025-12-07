@@ -1,0 +1,26 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "ES2022",
+    "module": "esnext",
+    "lib": ["ES2022", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@angular-state-comparison/services": ["libs/services/src/index.ts"],
+      "@angular-state-comparison/tailwind-config": ["libs/tailwind-config/src/index.ts"],
+      "@angular-state-comparison/types": ["libs/types/src/index.ts"],
+      "@angular-state-comparison/ui": ["libs/ui/src/index.ts"],
+      "@angular-state-comparison/utils": ["libs/utils/src/index.ts"]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}

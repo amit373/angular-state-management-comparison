@@ -1,0 +1,18 @@
+@if (type === 'text' && lines > 1) {
+  <div class="space-y-2">
+    @for (line of [].constructor(lines); track $index) {
+      <div
+        [class]="skeletonClasses"
+        [style.width]="$index === lines - 1 ? '75%' : width"
+        [style.height]="height"
+      ></div>
+    }
+  </div>
+} @else {
+  <div
+    [class]="skeletonClasses"
+    [style.width]="width"
+    [style.height]="height"
+  ></div>
+}
+

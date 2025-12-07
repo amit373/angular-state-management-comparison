@@ -1,0 +1,75 @@
+{
+  "name": "akita-app",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/akita-app/src",
+  "prefix": "app",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/akita-app",
+        "index": "apps/akita-app/src/index.html",
+        "main": "apps/akita-app/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/akita-app/tsconfig.app.json",
+        "assets": ["apps/akita-app/src/favicon.ico", "apps/akita-app/src/assets"],
+        "styles": ["apps/akita-app/src/styles.css"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "options": {
+        "port": 4203
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "akita-app:build:production"
+        },
+        "development": {
+          "buildTarget": "akita-app:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "akita-app:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}
+
